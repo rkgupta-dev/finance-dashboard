@@ -3,7 +3,7 @@
     <v-card-title class="d-flex flex-wrap align-center">
       Accounts
       <v-spacer></v-spacer>
-      <div class="text-subtitle-1">Total Balance: ${{ totalBalance }}</div>
+      <div class="text-subtitle-1">Total Balance: ₹{{ totalBalance }}</div>
     </v-card-title>
     <v-list>
       <v-list-item v-for="account in accounts" :key="account.id">
@@ -18,7 +18,7 @@
         </v-list-item-content>
         <v-list-item-action>
           <v-list-item-title class="text-right">
-            {{ account.balance }}
+            ₹{{ account.balance }}
           </v-list-item-title>
         </v-list-item-action>
       </v-list-item>
@@ -65,28 +65,28 @@ export default {
           id: "1",
           title: "Main Savings",
           description: "Personal savings",
-          balance: "$8,459.45",
+          balance: "8,459.45",
           type: "savings",
         },
         {
           id: "2",
           title: "Checking Account",
           description: "Daily expenses",
-          balance: "$2,850.00",
+          balance: "2,850.00",
           type: "checking",
         },
         {
           id: "3",
           title: "Investment Portfolio",
           description: "Stock & ETFs",
-          balance: "$15,230.80",
+          balance: "15,230.80",
           type: "investment",
         },
         {
           id: "4",
           title: "Credit Card",
           description: "Pending charges",
-          balance: "$1,200.00",
+          balance: "1,200.00",
           type: "debt",
         },
       ],

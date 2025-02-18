@@ -25,8 +25,9 @@
               'red--text': transaction.type === 'outgoing',
             }"
           >
-            {{ transaction.type === "incoming" ? "+" : "-"
-            }}{{ transaction.amount }}
+            {{ transaction.type === "incoming" ? "+" : "-" }} ₹{{
+              transaction.amount
+            }}
           </v-list-item-title>
         </v-list-item-action>
       </v-list-item>
@@ -49,7 +50,7 @@ export default {
         {
           id: "1",
           title: "Apple Store Purchase",
-          amount: "$999.00",
+          amount: "999.00",
           type: "outgoing",
           category: "shopping",
           timestamp: "Today, 2:45 PM",
@@ -58,7 +59,7 @@ export default {
         {
           id: "2",
           title: "Salary Deposit",
-          amount: "$4,500.00",
+          amount: "4,500.00",
           type: "incoming",
           category: "income",
           timestamp: "Today, 9:00 AM",
@@ -67,7 +68,7 @@ export default {
         {
           id: "3",
           title: "Netflix Subscription",
-          amount: "$15.99",
+          amount: "15.99",
           type: "outgoing",
           category: "entertainment",
           timestamp: "Yesterday",
@@ -76,7 +77,7 @@ export default {
         {
           id: "4",
           title: "Supabase Subscription",
-          amount: "$15.99",
+          amount: "15.99",
           type: "outgoing",
           category: "software",
           timestamp: "Yesterday",

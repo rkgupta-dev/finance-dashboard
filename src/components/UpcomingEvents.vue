@@ -16,6 +16,10 @@
                 getIcon(event.type)
               }}</v-icon>
               {{ event.title }}
+              <v-spacer></v-spacer>
+              <v-chip small :color="getStatusColor(event.status)">{{
+                event.status
+              }}</v-chip>
             </v-card-title>
             <v-card-text>
               <p>{{ event.subtitle }}</p>
@@ -28,12 +32,9 @@
                 <span class="caption">Progress</span>
                 <span class="caption">{{ event.progress }}%</span>
               </div>
-              <v-chip
-                small
-                class="mt-2"
-                :color="getStatusColor(event.status)"
-                >{{ event.status }}</v-chip
-              >
+              <div class="mt-2">
+                {{ event.date }}
+              </div>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="primary">
@@ -60,7 +61,7 @@ export default {
           subtitle: "3 months of expenses saved",
           type: "savings",
           date: "Target: Dec 2024",
-          amount: "$15,000",
+          amount: "15,000",
           status: "in-progress",
           progress: 65,
         },
@@ -70,7 +71,7 @@ export default {
           subtitle: "Tech sector investment plan",
           type: "investment",
           date: "Target: Jun 2024",
-          amount: "$50,000",
+          amount: "50,000",
           status: "pending",
           progress: 30,
         },
@@ -80,7 +81,7 @@ export default {
           subtitle: "Student loan payoff plan",
           type: "debt",
           date: "Target: Mar 2025",
-          amount: "$25,000",
+          amount: "25,000",
           status: "in-progress",
           progress: 45,
         },
