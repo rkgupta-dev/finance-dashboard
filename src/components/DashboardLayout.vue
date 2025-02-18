@@ -37,7 +37,7 @@
         }}</v-icon>
       </v-btn>
 
-      <v-menu offset-y>
+      <v-menu offset-y transition="slide-y-transition">
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-avatar size="32">

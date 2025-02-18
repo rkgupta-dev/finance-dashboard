@@ -6,6 +6,7 @@ import TransactionsView from "@/views/TransactionsView.vue";
 import AnalyticsView from "@/views/AnalyticsView.vue";
 import OrganizationView from "@/views/OrganizationView.vue";
 import ProjectsView from "@/views/ProjectsView.vue";
+import InvoicesView from "@/views/InvoicesView.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/projects",
     name: "projects",
     component: ProjectsView,
+  },
+  {
+    path: "/invoices",
+    name: "invoices",
+    component: InvoicesView,
   },
 ];
 
