@@ -5,6 +5,7 @@ import DashboardLayout from "@/components/DashboardLayout.vue";
 import TransactionsView from "@/views/TransactionsView.vue";
 import AnalyticsView from "@/views/AnalyticsView.vue";
 import OrganizationView from "@/views/OrganizationView.vue";
+import ProjectsView from "@/views/ProjectsView.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/organization",
     name: "organization",
     component: OrganizationView,
+  },
+  {
+    path: "/projects",
+    name: "projects",
+    component: ProjectsView,
   },
 ];
 
