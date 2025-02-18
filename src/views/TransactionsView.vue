@@ -108,7 +108,7 @@ export default {
       transactions: [
         {
           description: "Groceries",
-          amount: 50,
+          amount: 500,
           category: "Food",
           date: "2025-02-10",
         },
@@ -116,6 +116,42 @@ export default {
           description: "Rent",
           amount: 1200,
           category: "Housing",
+          date: "2025-02-01",
+        },
+        {
+          description: "Groceries",
+          amount: 500,
+          category: "Food",
+          date: "2025-02-10",
+        },
+        {
+          description: "Goa",
+          amount: 500,
+          category: "Transport",
+          date: "2025-02-01",
+        },
+        {
+          description: "BLR to RNC",
+          amount: 2000,
+          category: "Transport",
+          date: "2025-02-10",
+        },
+        {
+          description: "Movies",
+          amount: 1200,
+          category: "Entertainment",
+          date: "2025-02-01",
+        },
+        {
+          description: "Rent",
+          amount: 1200,
+          category: "Housing",
+          date: "2025-02-01",
+        },
+        {
+          description: "Other",
+          amount: 1000,
+          category: "Other",
           date: "2025-02-01",
         },
       ],
