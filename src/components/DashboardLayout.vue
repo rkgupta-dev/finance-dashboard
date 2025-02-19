@@ -48,17 +48,46 @@
             </v-avatar>
           </v-btn>
         </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>Profile</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Settings</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Logout</v-list-item-title>
-          </v-list-item>
-        </v-list>
+        <v-card class="pa-2">
+          <v-list>
+            <v-list-item>
+              <v-list-item-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title>John Leider</v-list-item-title>
+                <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item>
+              <v-list-item-title>Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>Settings</v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item>
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>Sign Up</v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-card>
       </v-menu>
     </v-app-bar>
 
