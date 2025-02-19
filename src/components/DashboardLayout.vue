@@ -16,6 +16,7 @@
           :key="item.title"
           :to="item.route"
           link
+          active-class="primary--text"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
