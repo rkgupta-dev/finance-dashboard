@@ -12,6 +12,8 @@ import InvoicesView from "@/views/InvoicesView.vue";
 import LoginSignup from "@/views/LoginSignup.vue";
 import PaymentView from "@/views/PaymentView.vue";
 import MembersView from "@/views/MembersView.vue";
+import SettingsView from "@/views/SettingsView.vue";
+import HelpView from "@/views/HelpView.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,8 @@ const routes = [
   { path: "/login", name: "login", component: LoginSignup },
   { path: "/payments", name: "payments", component: PaymentView },
   { path: "/members", name: "members", component: MembersView },
+  { path: "/settings", name: "settings", component: SettingsView },
+  { path: "/help", name: "help", component: HelpView },
 ];
 
 const router = new VueRouter({
