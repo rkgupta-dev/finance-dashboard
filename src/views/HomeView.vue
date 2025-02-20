@@ -1,12 +1,13 @@
 <template>
   <v-container>
-    <v-row>
-      <!-- Financial Summary Cards -->
+    <v-row class="financial-summary-container d-flex flex-nowrap">
       <v-col
         v-for="(card, index) in financialSummary"
         :key="index"
-        cols="12"
+        cols="10"
+        sm="6"
         md="3"
+        class="flex-shrink-0"
       >
         <v-card class="mb-4" :color="card.color" dark>
           <v-card-title class="text-h6">{{ card.title }}</v-card-title>
@@ -240,5 +241,16 @@ export default {
 }
 .v-data-table {
   border-radius: 8px;
+}
+.financial-summary-container {
+  overflow-x: auto; /* Enable scrolling */
+}
+
+@media (min-width: 960px) {
+  /* Hide scrolling on medium+ screens */
+  .financial-summary-container {
+    overflow-x: hidden;
+    flex-wrap: wrap; /* Allow normal wrapping */
+  }
 }
 </style>
