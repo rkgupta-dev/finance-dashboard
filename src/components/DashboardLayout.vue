@@ -43,7 +43,7 @@
           <v-btn icon v-bind="attrs" v-on="on">
             <v-avatar size="32">
               <v-img
-                src="https://ferf1mheo22r9ira.public.blob.vercel-storage.com/avatar-01-n0x8HFv8EUetf9z6ht0wScJKoTHqf8.png"
+                src="https://cdn-icons-png.flaticon.com/128/4139/4139981.png"
               ></v-img>
             </v-avatar>
           </v-btn>
@@ -53,14 +53,10 @@
             <v-list>
               <!-- User Profile Section -->
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-avatar color="white">
-                    <img
-                      src="https://cdn.vuetifyjs.com/images/john.jpg"
-                      alt="User Avatar"
-                    />
-                  </v-avatar>
-                </v-list-item-avatar>
+                <v-avatar size="40" tile class="mr-2 rounded" color="indigo">
+                  <v-icon dark size="35">mdi-account-circle </v-icon>
+                </v-avatar>
+
                 <v-list-item-content>
                   <v-list-item-title class="font-weight-bold">
                     {{ user.name }}

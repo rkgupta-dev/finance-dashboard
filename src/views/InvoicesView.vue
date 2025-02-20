@@ -2,18 +2,17 @@
   <v-container>
     <v-alert prominent type="info" text color="info" dismissible class="mb-4">
       <v-row align="center">
-        <v-col cols="9">
-          <strong
-            >Reduce the amount you owe by applying credit notes to
-            invoices</strong
-          >
+        <v-col cols="12" md="9">
+          <strong>
+            Reduce the amount you owe by applying credit notes to invoices
+          </strong>
           <div>
             You can now use your credit notes directly towards paying your
             invoices, saving your time and decreasing the amount left to pay.
           </div>
         </v-col>
-        <v-col cols="3" class="text-right">
-          <v-btn color="primary">See credit notes</v-btn>
+        <v-col cols="12" md="3" class="text-md-right text-center">
+          <v-btn color="primary" class="mt-2 mt-md-0">See credit notes</v-btn>
         </v-col>
       </v-row>
     </v-alert>
