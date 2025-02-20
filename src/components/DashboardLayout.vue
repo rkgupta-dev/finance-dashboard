@@ -56,7 +56,7 @@
             </v-avatar>
           </v-btn>
         </template>
-        <v-card class="pa-2">
+        <v-card class="pa-2" max-width="300">
           <v-list v-if="isLoggedIn">
             <v-list>
               <!-- User Profile Section -->
