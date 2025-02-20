@@ -1,6 +1,6 @@
 <template>
   <v-app :dark="isDark">
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-if="!hideLayout" v-model="drawer" app>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6"> MoneyMatrix </v-list-item-title>
@@ -28,13 +28,13 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar v-if="!hideLayout" app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="toggleTheme">
         <v-icon>{{
-          $vuetify.theme.dark ? "mdi-weather-sunny" : "mdi-weather-night"
+          isDark ? "mdi-weather-sunny" : "mdi-weather-night"
         }}</v-icon>
       </v-btn>
 
@@ -49,43 +49,76 @@
           </v-btn>
         </template>
         <v-card class="pa-2">
-          <v-list>
-            <v-list-item>
-              <v-list-item-avatar>
-                <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="John"
-                />
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+          <v-list v-if="isLoggedIn">
+            <v-list>
+              <!-- User Profile Section -->
+              <v-list-item>
+                <v-list-item-avatar>
+                  <v-avatar color="white">
+                    <img
+                      src="https://cdn.vuetifyjs.com/images/john.jpg"
+                      alt="User Avatar"
+                    />
+                  </v-avatar>
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-bold">
+                    {{ user.name }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="text-caption">
+                    {{ user.email }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
 
-            <v-divider></v-divider>
+              <v-divider class="my-2" color="white"></v-divider>
 
-            <v-list-item>
-              <v-list-item-title>Profile</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>Settings</v-list-item-title>
-            </v-list-item>
+              <!-- Navigation Items -->
+              <v-list-item to="/profile" class="menu-item">
+                <v-list-item-icon>
+                  <v-icon color="deep-purple">mdi-account</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Profile</v-list-item-title>
+              </v-list-item>
 
-            <v-divider></v-divider>
+              <v-list-item to="/settings" class="menu-item">
+                <v-list-item-icon>
+                  <v-icon color="warning">mdi-cog</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Settings</v-list-item-title>
+              </v-list-item>
 
-            <v-list-item>
-              <v-list-item-title>Login</v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>Sign Up</v-list-item-title>
-            </v-list-item>
+              <v-divider class="my-2" color="white"></v-divider>
 
-            <v-divider></v-divider>
+              <!-- Logout -->
+              <v-list-item @click="logout" class="menu-item">
+                <v-list-item-icon>
+                  <v-icon color="red">mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title class="text-red font-weight-bold"
+                  >Logout</v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-list>
 
-            <v-list-item>
-              <v-list-item-title>Logout</v-list-item-title>
-            </v-list-item>
+          <v-list v-else>
+            <v-card flat v-if="!isLoggedIn" class="text-center">
+              <div>
+                <v-icon size="50" color="warning">mdi-key</v-icon>
+              </div>
+              <div class="font-weight-bold text-primary">
+                You are not logged In
+              </div>
+              <div class="my-4">Please log in or sign up to continue.</div>
+              <v-btn color="primary" dark class="mr-2" to="/login">
+                <v-icon left>mdi-login</v-icon> Login
+              </v-btn>
+
+              <v-btn color="success" dark to="/login">
+                <v-icon left>mdi-account-plus</v-icon> Sign Up
+              </v-btn>
+            </v-card>
           </v-list>
         </v-card>
       </v-menu>
@@ -96,7 +129,6 @@
         <slot></slot>
       </v-container>
     </v-main>
-
     <v-snackbar v-model="snackbar" :timeout="3000" color="success">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
@@ -109,28 +141,46 @@
 <script>
 export default {
   name: "DashboardLayout",
-  data: () => ({
-    drawer: null,
-    snackbar: false,
-    snackbarText: "",
-    isDark: true, // Dark mode enabled by default
-    menuItems: [
-      { title: "Dashboard", icon: "mdi-view-dashboard", route: "/" },
-      { title: "Analytics", icon: "mdi-chart-bar", route: "/analytics" },
-      {
-        title: "Organization",
-        icon: "mdi-office-building",
-        route: "/organization",
-      },
-      { title: "Projects", icon: "mdi-folder", route: "/projects" },
-      { title: "Transactions", icon: "mdi-wallet", route: "/transactions" },
-      { title: "Invoices", icon: "mdi-receipt", route: "/invoices" },
-      { title: "Payments", icon: "mdi-credit-card", route: "/payments" },
-      { title: "Members", icon: "mdi-account-group", route: "/members" },
-      { title: "Settings", icon: "mdi-cog", route: "/settings" },
-      { title: "Help", icon: "mdi-help-circle", route: "/help" },
-    ],
-  }),
+  data() {
+    return {
+      drawer: null,
+      snackbar: false,
+      snackbarText: "",
+      isDark: true,
+      menuItems: [
+        { title: "Dashboard", icon: "mdi-view-dashboard", route: "/" },
+        { title: "Analytics", icon: "mdi-chart-bar", route: "/analytics" },
+        {
+          title: "Organization",
+          icon: "mdi-office-building",
+          route: "/organization",
+        },
+        { title: "Projects", icon: "mdi-folder", route: "/projects" },
+        { title: "Transactions", icon: "mdi-wallet", route: "/transactions" },
+        { title: "Invoices", icon: "mdi-receipt", route: "/invoices" },
+        { title: "Payments", icon: "mdi-credit-card", route: "/payments" },
+        { title: "Members", icon: "mdi-account-group", route: "/members" },
+        { title: "Settings", icon: "mdi-cog", route: "/settings" },
+        { title: "Help", icon: "mdi-help-circle", route: "/help" },
+      ],
+    };
+  },
+  computed: {
+    isLoggedIn() {
+      return !!localStorage.getItem("loggedInUser");
+    },
+    user() {
+      return (
+        JSON.parse(localStorage.getItem("loggedInUser")) || {
+          name: "Guest",
+          email: "guest@example.com",
+        }
+      );
+    },
+    hideLayout() {
+      return this.$route.path === "/login" || this.$route.path === "/signup";
+    },
+  },
   methods: {
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
@@ -140,7 +190,9 @@ export default {
       this.snackbarText = "You have no new notifications";
     },
     logout() {
-      console.log("Logout clicked");
+      localStorage.removeItem("loggedInUser");
+      this.snackbarText = "Logged Out Successfully!";
+      this.snackbar = true;
     },
   },
 };

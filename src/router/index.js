@@ -7,6 +7,7 @@ import AnalyticsView from "@/views/AnalyticsView.vue";
 import OrganizationView from "@/views/OrganizationView.vue";
 import ProjectsView from "@/views/ProjectsView.vue";
 import InvoicesView from "@/views/InvoicesView.vue";
+import LoginSignup from "@/views/LoginSignup.vue";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes = [
     path: "/invoices",
     name: "invoices",
     component: InvoicesView,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginSignup,
   },
 ];
 
