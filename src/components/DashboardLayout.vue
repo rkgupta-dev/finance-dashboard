@@ -2,9 +2,17 @@
   <v-app :dark="isDark">
     <v-navigation-drawer v-if="!hideLayout" v-model="drawer" app>
       <v-list-item>
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/1041/1041888.png"
+          alt="logo"
+          width="42"
+          height="42"
+          class="mr-2"
+        />
+
         <v-list-item-content>
-          <v-list-item-title class="text-h6"> MoneyMatrix </v-list-item-title>
-          <v-list-item-subtitle> Financial Dashboard </v-list-item-subtitle>
+          <v-list-item-title class="text-h6">MoneyMatrix</v-list-item-title>
+          <v-list-item-subtitle>Financial Dashboard</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
