@@ -1,6 +1,17 @@
 <template>
   <v-container class="d-flex justify-center align-center">
     <v-card class="pa-6 rounded-lg elevation-12" width="450">
+      <v-row justify="center">
+        <v-col cols="12" class="text-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/1041/1041888.png"
+            alt="logo"
+            width="60"
+            height="60"
+          />
+          <h2 class="font-weight-bold mb-5">Welcome to MoneyMatrix</h2>
+        </v-col>
+      </v-row>
       <!-- Tabs -->
       <v-tabs v-model="tab" grow>
         <v-tab @click="tab = 0">Login</v-tab>
@@ -172,7 +183,6 @@ export default {
       );
 
       if (validUser) {
-        alert("Login Successful");
         localStorage.setItem("loggedInUser", JSON.stringify(validUser));
         this.isLoggedIn = true;
         this.loginError = "";

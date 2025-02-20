@@ -146,7 +146,7 @@ export default {
       drawer: null,
       snackbar: false,
       snackbarText: "",
-      isDark: true,
+      isDark: localStorage.getItem("isDark") === "true",
       menuItems: [
         { title: "Dashboard", icon: "mdi-view-dashboard", route: "/" },
         { title: "Analytics", icon: "mdi-chart-bar", route: "/analytics" },
@@ -181,9 +181,18 @@ export default {
       return this.$route.path === "/login" || this.$route.path === "/signup";
     },
   },
+  watch: {
+    isDark(newValue) {
+      this.$vuetify.theme.dark = newValue; // Apply the theme change
+      localStorage.setItem("isDark", newValue); // Save to localStorage
+    },
+  },
+  mounted() {
+    this.$vuetify.theme.dark = this.isDark; // Ensure theme is set on load
+  },
   methods: {
     toggleTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.isDark = !this.isDark;
     },
     showNotifications() {
       this.snackbar = true;
