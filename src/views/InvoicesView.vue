@@ -18,7 +18,7 @@
     </v-alert>
 
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" md="6" sm="12">
         <v-alert
           border="left"
           colored-border
@@ -35,7 +35,7 @@
           </div>
         </v-alert>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" md="6" sm="12">
         <v-alert
           border="left"
           colored-border

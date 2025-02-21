@@ -34,6 +34,23 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <template v-slot:append>
+        <v-divider></v-divider>
+        <div class="text-center pa-3">
+          <v-icon class="mb-1" color="primary">mdi-code-braces</v-icon>
+          <small class="font-weight-medium text-subtitle-2 primary--text">
+            Developed by
+            <a
+              href="https://www.linkedin.com/in/rohit-kr-gupta-921760208/"
+              target="_blank"
+              class="font-weight-bold text-decoration-underline primary--text"
+            >
+              Rohit Kr Gupta
+            </a>
+          </small>
+        </div>
+      </template>
     </v-navigation-drawer>
 
     <v-app-bar v-if="!hideLayout" app>
@@ -78,7 +95,7 @@
               <v-divider class="my-2" color="white"></v-divider>
 
               <!-- Navigation Items -->
-              <v-list-item to="/profile" class="menu-item">
+              <v-list-item @click="dialog = true" class="menu-item">
                 <v-list-item-icon>
                   <v-icon color="deep-purple">mdi-account</v-icon>
                 </v-list-item-icon>
@@ -139,6 +156,70 @@
         <v-btn text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
       </template>
     </v-snackbar>
+    <!-- Profile Dialog -->
+    <v-dialog v-model="dialog" max-width="450" persistent>
+      <v-card class="pa-4">
+        <!-- Profile Header -->
+        <div class="text-center">
+          <v-avatar size="100" class="elevation-3">
+            <v-img
+              :src="user.avatar || defaultAvatar"
+              alt="User Avatar"
+            ></v-img>
+          </v-avatar>
+
+          <v-btn icon small class="edit-avatar-btn" @click="changeAvatar">
+            <v-icon color="primary">mdi-pencil</v-icon>
+          </v-btn>
+
+          <div class="text-center">
+            <div class="mt-2 text-h6">{{ user.name }}</div>
+            <div class="grey--text text-subtitle-1">
+              {{ user.email }}
+            </div>
+          </div>
+        </div>
+
+        <v-divider class="my-3"></v-divider>
+
+        <!-- Profile Details -->
+        <v-list dense>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon color="primary">mdi-account-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Role</v-list-item-title>
+              <v-list-item-subtitle>{{
+                user.role || "User"
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon color="primary">mdi-calendar-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Joined</v-list-item-title>
+              <v-list-item-subtitle>{{
+                user.joined || "26 Feb 2025"
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
+        <v-divider class="my-3"></v-divider>
+
+        <!-- Actions -->
+        <v-card-actions class="justify-space-between">
+          <v-btn color="red darken-2" outlined @click="logout">
+            <v-icon left>mdi-logout</v-icon> Logout
+          </v-btn>
+          <v-btn color="primary" text @click="dialog = false"> Close </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -151,6 +232,8 @@ export default {
       snackbar: false,
       snackbarText: "",
       isDark: localStorage.getItem("isDark") === "true",
+      dialog: false,
+      defaultAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
       menuItems: [
         { title: "Dashboard", icon: "mdi-view-dashboard", route: "/" },
         { title: "Analytics", icon: "mdi-chart-bar", route: "/analytics" },
@@ -178,6 +261,9 @@ export default {
         JSON.parse(localStorage.getItem("loggedInUser")) || {
           name: "Guest",
           email: "guest@example.com",
+          avatar: "",
+          role: "Guest",
+          joined: "26 Feb 2025",
         }
       );
     },
@@ -206,6 +292,11 @@ export default {
       localStorage.removeItem("loggedInUser");
       this.snackbarText = "Logged Out Successfully!";
       this.snackbar = true;
+      this.dialog = false;
+      location.reload();
+    },
+    changeAvatar() {
+      alert("Feature coming soon!"); // You can add a file upload here
     },
   },
 };

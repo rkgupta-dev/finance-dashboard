@@ -12,8 +12,8 @@
           </v-avatar>
         </div>
         <div class="my-2">
-          <h2 class="text-h5 font-weight-bold">John Doe</h2>
-          <p class="text-subtitle-1">john.doe@email.com</p>
+          <h2 class="text-h5 font-weight-bold">Rohit Kr. Gupta</h2>
+          <p class="text-subtitle-1">rohitkrgupta333@email.com</p>
         </div>
       </div>
 
