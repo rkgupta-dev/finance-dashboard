@@ -5,10 +5,7 @@
       <div class="d-flex mb-2">
         <div class="mr-4">
           <v-avatar size="80">
-            <v-img
-              src="https://randomuser.me/api/portraits/men/10.jpg"
-              alt="User Avatar"
-            />
+            <v-img :src="require('@/assets/rohit.png')" alt="User Avatar" />
           </v-avatar>
         </div>
         <div class="my-2">
