@@ -128,7 +128,7 @@
 
       <!-- Account Actions -->
       <p class="text-subtitle-1 font-weight-bold">Account Actions</p>
-      <v-btn color="error" outlined @click="confirmDeleteAccount"
+      <v-btn color="error" outlined @click="deleteAccount"
         >Delete Account</v-btn
       >
 
@@ -175,26 +175,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <!-- Delete Account Confirmation Dialog -->
-    <v-dialog v-model="deleteDialog" max-width="400">
-      <v-card>
-        <v-card-title class="text-h6">Confirm Deletion</v-card-title>
-        <v-card-text>
-          Are you sure you want to delete your account? This action cannot be
-          undone.
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn outlined @click="deleteDialog = false">Cancel</v-btn>
-          <v-btn color="error" @click="deleteAccount">Delete</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
   data() {
     return {
@@ -254,27 +240,50 @@ export default {
     },
     saveChanges() {
       localStorage.setItem("loggedInUser", JSON.stringify(this.user));
-      alert("Profile updated successfully!");
+
+      Swal.fire({
+        title: "Success!",
+        text: "Profile updated successfully!",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+      });
     },
     updatePassword() {
       if (this.newPassword !== this.confirmPassword) {
-        alert("Passwords do not match!");
+        Swal.fire({
+          title: "Error!",
+          text: "Passwords do not match!",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
         return;
       }
+
       let users = JSON.parse(localStorage.getItem("users")) || [];
       let userIndex = users.findIndex((u) => u.mobile === this.user.mobile);
+
       if (userIndex !== -1) {
         users[userIndex].password = this.newPassword;
         localStorage.setItem("users", JSON.stringify(users));
-        alert("Password updated successfully!");
+
+        Swal.fire({
+          title: "Success!",
+          text: "Password updated successfully!",
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+        });
+
         this.passwordDialog = false;
       } else {
-        alert("User not found!");
+        Swal.fire({
+          title: "Error!",
+          text: "User not found!",
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
       }
     },
-    confirmDeleteAccount() {
-      this.deleteDialog = true;
-    },
+
     updateTheme() {
       localStorage.setItem("theme", this.appearance.theme);
     },
@@ -283,19 +292,29 @@ export default {
       localStorage.setItem("isDark", this.appearance.darkMode);
     },
     deleteAccount() {
-      localStorage.removeItem("loggedInUser");
-      localStorage.removeItem("theme");
-      localStorage.removeItem("isDark");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Your account will be permanently deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Perform account deletion
+          localStorage.removeItem("loggedInUser");
 
-      // Remove user from the users array if needed
-      let users = JSON.parse(localStorage.getItem("users")) || [];
-      users = users.filter((u) => u.mobile !== this.user.mobile);
-      localStorage.setItem("users", JSON.stringify(users));
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your account has been deleted successfully.",
+            icon: "success",
+            confirmButtonColor: "#3085d6",
+          });
 
-      alert("Account deleted successfully!");
-
-      // Redirect or reload the page
-      window.location.href = "/"; // Change to your actual logout or home page
+          location.reload(); // Refresh to reflect changes
+        }
+      });
     },
   },
 };
