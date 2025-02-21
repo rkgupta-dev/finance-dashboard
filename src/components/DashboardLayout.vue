@@ -182,7 +182,7 @@ export default {
       );
     },
     hideLayout() {
-      return this.$route.path === "/login" || this.$route.path === "/signup";
+      return this.$route.name === "login" || this.$route.name === "notfound"; // Hide layout for the 404 page
     },
   },
   watch: {

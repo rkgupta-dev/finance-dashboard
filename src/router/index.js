@@ -14,6 +14,7 @@ import PaymentView from "@/views/PaymentView.vue";
 import MembersView from "@/views/MembersView.vue";
 import SettingsView from "@/views/SettingsView.vue";
 import HelpView from "@/views/HelpView.vue";
+import PageNotFound from "@/components/PageNotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,9 @@ const routes = [
   { path: "/members", name: "members", component: MembersView },
   { path: "/settings", name: "settings", component: SettingsView },
   { path: "/help", name: "help", component: HelpView },
+
+  // Catch-all route for 404 Page
+  { path: "*", name: "notfound", component: PageNotFound },
 ];
 
 const router = new VueRouter({
